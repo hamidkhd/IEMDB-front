@@ -1,0 +1,112 @@
+.flex-right {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    background-color: #292929;
+    color: white;
+}
+
+.flex-left {
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #292929;
+}
+
+.flex-left img {
+    height: 43em;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+}
+
+
+.row1 {
+    margin-top: 1.5em;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+}
+
+.row4 {
+    white-space: nowrap;
+    margin-right: 2em;
+    width: 80em;
+    height: 20em;
+    padding-right: 2.5em;
+    padding-left: 2.5em;
+    align-items: center;
+    align-content: center;
+    border-radius: 20px;
+    overflow-x: auto;
+    display: flex;
+    gap: 10em;
+    background-color: #4E4E50;
+}
+
+.row4 img {
+    border-radius: 20px;
+}
+
+.row4 div {
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+.dl {
+    text-align: right;
+}
+
+.row3 {
+    margin: auto;
+}
+
+
+.row2 {
+    width: 100%;
+    justify-content: right;
+    text-align: right;
+    padding: 3.5em;
+}
+
+
+.img-container {
+    position: relative;
+    border-radius: 20px;
+    height: 16em;
+    width: 16em;
+}
+
+.image {
+    display: block;
+    width: inherit;
+    height: inherit;
+}
+
+.overlay {
+    position: absolute;
+    border-radius: 20px;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #B1202580;
+    justify-content: center;
+    align-items: center;
+    object-fit: fill;
+    display: flex;
+}
+
+.img-container:hover .overlay {
+    opacity: 1;
+}

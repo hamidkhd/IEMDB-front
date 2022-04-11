@@ -1,0 +1,254 @@
+body {
+    background-color: #292929 !important;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10em;
+}
+
+.back-image {
+    width: 100%;
+    height: 35em;
+}
+
+.back-image img {
+    width: 100%;
+    height: 43em;
+}
+
+.comments-list {
+    display: flex;
+    flex-direction: column;
+    width: 50em;
+    height: 55em;
+    margin-top: 3em;
+    box-shadow: 0.5em 0.5em;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.comment {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 2em;
+    width: 45em;
+    height: 12em;
+    justify-content: center;
+}
+
+
+.title {
+    color: white;
+    text-align: center;
+    margin-top: 1em;
+}
+
+.comments-box {
+    background-color: #4E4E50;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2em;
+    justify-content: center;
+    align-items: center;
+    margin-top: 7em;
+}
+
+
+.actors-box {
+    display: flex;
+    flex-direction: column;
+    background-color: #4E4E50;
+    border-radius: 2em;
+    width: 50em;
+    height: 20em;
+    margin-top: 5em;
+    box-shadow: 0.5em 0.5em;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
+    overflow-x: auto;
+}
+
+.images-list {
+    display: flex;
+    width: 100%;
+    margin-bottom: 2em;
+    gap: 3em;
+    margin-right: 2em;
+}
+
+.actors-box-img-container {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    border-radius: 5em;
+    width: 10em;
+    height: 10em;
+    color: white;
+    margin-top: 3em;
+}
+
+.actors-box-img-container img {
+    display: block;
+    border-radius: 5em;
+    position: relative;
+    width: inherit;
+    height: inherit;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.overlay {
+    position: absolute;
+    border-radius: 5em;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    opacity: 0;
+    transition: .5s ease;
+    background-color: #B1202580;
+    justify-content: center;
+    align-items: center;
+    object-fit: fill;
+    display: flex;
+}
+
+.overlay-text {
+    color: white;
+    text-align: center;
+}
+
+.actors-box-img-container:hover .overlay {
+    opacity: 1;
+}
+
+.hor-line {
+    font-size: 3em;
+    width: 75%;
+    text-align: center;
+    background: white;
+}
+
+.comment-text {
+    text-align: right;
+    padding-right: 2em;
+
+}
+
+.submit {
+    background-color: green;
+    cursor: pointer;
+    color: white;
+    display: inline-block;
+    float: left;
+    padding-right: 1em;
+}
+
+.com-txt {
+    width: 40em;
+    height: 5em;
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+}
+.submit-button {
+    align-self: flex-end;
+    margin-left: 1em;
+    margin-top: 0.5em;
+    background-color: green;
+    border-radius: 0.5em;
+    width: 5em;
+}
+
+.comments {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    width: 45em;
+    border-radius: 2em;
+    padding: 1em;
+}
+
+.comment-body {
+    display: flex;
+    justify-content: space-between;
+}
+
+.commenter-name {
+    align-self: flex-start;
+}
+
+svg {
+    width: 2em !important;
+    height: 2em !important;
+}
+
+.comment-score {
+    display: flex;
+    justify-content: space-around;
+}
+
+.movie-detail {
+    display: flex;
+    /*background-color: #4E4E50;*/
+    height: 25em;
+    width: 65em;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.col-score {
+    background-color: #ff000080;
+    display: flex;
+    flex-direction: column;
+    width: 15em;
+    height: 15em;
+    color: white;
+    justify-content: center;
+    align-items: center;
+}
+
+.col-image {
+    display: flex;
+    flex-direction: column;
+    width: 25em;
+    height: 25em;
+}
+
+.col-image img {
+    width: 18em;
+    height: 18em;
+}
+
+
+.col-desc {
+    display: flex;
+    flex-direction: column;
+    width: 50em;
+    height: 18em;
+    color: white;
+}
+
+dt {
+    margin-left: 1em;
+}
+
+.sub-desc {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.custom-icon {
+    margin-left: 3em;
+}
+
