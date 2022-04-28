@@ -3,15 +3,19 @@ import {useState, useEffect} from "react";
 import './Watchlist.css';
 import {getMovieActors} from "../Services/Movie";
 import {deleteFromWatchList, getRecommendedMovies, getWatchList} from "../Services/Watchlist";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 function Watchlist(props) {
     const [recommendedMovies, setRecommendedMovies] = useState({});
+    const [loading, setLoading] = useState(true);
     const showRecommendedMovies = () => {
         console.log('update');
+        setLoading(true);
         getRecommendedMovies()
             .then(res => {
                 console.log(res);
                 setRecommendedMovies(res);
+                setLoading(false);
             })
             .catch(error => {
                 if (error.response)
@@ -27,7 +31,9 @@ function Watchlist(props) {
     return (
         <div className="container">
             <WatchlistMovies updateRecommended={showRecommendedMovies}/>
-            <RecommendedMovies movies={recommendedMovies}/>
+            {loading? (<LoadingSpinner />) : (
+                <RecommendedMovies movies={recommendedMovies}/> )
+            }
         </div>
     );
 
@@ -35,10 +41,13 @@ function Watchlist(props) {
 
 function WatchlistMovies(props) {
     const [movies, setMovies] = useState({});
+    const [loading, setLoading] = useState(true);
     useEffect( () => {
+        setLoading(true);
         getWatchList()
             .then(res => {
                 setMovies(res);
+                setLoading(false);
             })
             .catch(error => {
                 if (error.response)
@@ -47,7 +56,7 @@ function WatchlistMovies(props) {
                     console.log(error);
             });
     },[]);
-    if(movies.length == 0)
+    if(loading)
         return null;
     let movieItems = [];
     for (let i=0; i<movies.length; i++)
@@ -71,6 +80,7 @@ function MovieItem(movie, setMovies, updateRecommended) {
                     console.log(error);
             });
     }
+
     return (
         <div className="movie-desc">
             <div className="movie-desc-img-container">

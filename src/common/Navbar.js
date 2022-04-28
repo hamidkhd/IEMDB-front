@@ -59,38 +59,8 @@ class Navbar extends React.Component {
         this.props.searchDetails(type, this.state.value);
     }
 
-    userIcon() {
-        const logout = () => {
-            localStorage.setItem("loggedIn", JSON.stringify(false));
-            localStorage.setItem("user", JSON.stringify(null));
-        }
-
-        return (
-            <div className="guest-dropdown">
-                <span className="iconify" data-icon="bxs:user-circle"></span>
-                <div className="guest-dropdown-content">
-                    {!this.props.login ? (
-                        <div>
-                            <a href="/login">ورود</a>
-                            <a href="#">ثبت نام</a>
-                        </div> ) : (
-                        <div>
-                            {this.props.user != null &&
-                                <a href="">{this.props.user.email}</a>
-                            }
-                            <a href="/watchlist">watchlist</a>
-                            <a href="/" onClick={logout}>خروج</a>
-
-                        </div>
-                    )
-                    }
-                </div>
-            </div>
-        );
-    }
 
     render() {
-        console.log('in nav ' + this.props.login);
         return (
             <header>
                 <nav className="navbar">
@@ -98,12 +68,45 @@ class Navbar extends React.Component {
                     {(window.location.pathname == ("/") || window.location.pathname == ("/movies")) &&
                         this.searchBox()
                     }
-                    {this.userIcon()}
+                    <UserIcon />
                 </nav>
             </header>
         );
     }
 }
+
+function UserIcon() {
+    const [loading, setLoading] = useState(false);
+    const logout = () => {
+        localStorage.removeItem("user");
+    }
+    const login = localStorage.getItem("user") == null ? false:true;
+    console.log(localStorage.getItem("user"));
+    console.log(login);
+    return (
+        <div className="guest-dropdown">
+            <span className="iconify" data-icon="bxs:user-circle"></span>
+            <div className="guest-dropdown-content">
+                {!login ? (
+                    <div>
+                        <a href="/login">ورود</a>
+                        <a href="#">ثبت نام</a>
+                    </div> ) : (
+                    <div>
+                        {/*{(localStorage.getItem("user") != null && !loading) &&*/}
+                            <a href="">{JSON.parse(localStorage.getItem("user")).email}</a>
+                        {/*}*/}
+                        <a href="/watchlist">watchlist</a>
+                        <a href="/" onClick={logout}>خروج</a>
+
+                    </div>
+                )
+                }
+            </div>
+        </div>
+    );
+}
+
 
 
 export default Navbar;

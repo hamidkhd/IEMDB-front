@@ -15,43 +15,12 @@ function App() {
 
     const [searchBy, setSearchBy] = useState("name");
     const [searchValue, setSearchValue] = useState("");
-    const [loggedIn, setLoggedIn] = useState(false);
-    const [user, setUser] = useState(null);
     const changeSearchOptions = (newSearchBy, newSearchValue) => {
         setSearchBy(newSearchBy);
         setSearchValue(newSearchValue);
-        console.log(searchBy);
-        console.log('value ' + searchValue);
-        console.log(newSearchValue);
-    }
-
-    useEffect(() => {
-        console.log("salaaaaam", searchValue)
-    }, [searchValue])
-
-    const changeLogin = (login, loggedUser) => {
-        console.log('changed');
-        setLoggedIn(login);
-        setUser(loggedUser);
     }
 
 
-    useEffect(() => {
-        setLoggedIn(JSON.parse(localStorage.getItem("loggedIn")));
-
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem("loggedIn", JSON.stringify(loggedIn));
-    }, [loggedIn]);
-
-    useEffect(() => {
-        setUser(JSON.parse(localStorage.getItem("user")));
-    }, []);
-
-    useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(user));
-    }, [user]);
 
     const routes =(
         <Routes>
@@ -66,14 +35,16 @@ function App() {
         <Routes>
             <Route exact path="/" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
             <Route exact path="/movies" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
-            <Route path="*" element={<Login setLogin={changeLogin}/>}/>
+            <Route path="*" element={<Login />}/>
         </Routes>
     )
+    const loggedIn = localStorage.getItem("user") == null? false:true;
+
     return (
         <header>
 
             <BrowserRouter forceRefresh={true}>
-                <Navbar searchDetails={changeSearchOptions} login={loggedIn} user={user}/>
+                <Navbar searchDetails={changeSearchOptions} />
                 {/*<Routes forceRefresh={true}>*/}
                 {/*    <Route path="/login" element={<Login setLogin={changeLogin} login={loggedIn}/>}/>*/}
                 {/*    <Route element={<ProtectedRoutes login={loggedIn}/>} >*/}

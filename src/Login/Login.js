@@ -15,9 +15,7 @@ function Login(props) {
                 if(res.name == "error")
                     window.location.replace("http://localhost:3000/login");
                 else {
-                    // localStorage.setItem("loggedIn", JSON.stringify(true));
-                    // localStorage.setItem("user", JSON.stringify(res));
-                    props.setLogin(true, res);
+                    localStorage.setItem("user", JSON.stringify(res));
                     window.location.replace("http://localhost:3000/");
                 }
                 setLoading(false);
