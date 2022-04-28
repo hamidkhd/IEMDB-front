@@ -3,10 +3,12 @@ import {useState, useEffect} from "react";
 import { useParams } from 'react-router-dom';
 import {getMovie} from "../Services/Movie";
 import {getActorMovies, getActor} from "../Services/Actors";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 function Actor(props) {
     const [actor, setActor] = useState(null);
     const [actorMovies, setActorMovies] = useState({});
+    const [loading, setLoading] = useState(true);
 
     const { actorId } = useParams();
     useEffect( () => {
@@ -26,6 +28,7 @@ function Actor(props) {
         getActor(actorId)
             .then(res => {
                 setActor(res);
+                setLoading(false);
             })
             .catch(error => {
                 if (error.response)
@@ -34,8 +37,8 @@ function Actor(props) {
                     console.log(error);
             });
     },[]);
-    if(actor == null || actorMovies.length == 0)
-        return null;
+    if (loading)
+        return <LoadingSpinner />;
     return (
         <div className="container-fluid">
             <div className="row">
@@ -48,11 +51,10 @@ function Actor(props) {
                     </div>
                 </div>
                 <div className="flex-left col-4">
-                    <img src={actor.image} alt={actor.name} />
+                    <img src={actor.image} alt={actor.name}/>
                 </div>
             </div>
         </div>
-
     );
 }
 

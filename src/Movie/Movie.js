@@ -5,16 +5,20 @@ import {addComment, getMovie, getMovieActors, postMovieCommentRate, postRate} fr
 import { useParams } from 'react-router-dom';
 import {getUser} from "../Services/User";
 import {getRecommendedMovies, updateWatchList} from "../Services/Watchlist";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 function Movie(props) {
     const { movieId } = useParams();
     const [movie, setMovie] = useState(null);
     const [comments, setComments] = useState({});
+    const [loading, setLoading] = useState(true);
     useEffect( () => {
+        setLoading(true);
         getMovie(movieId)
             .then(m => {
                 setMovie(m);
                 setComments(m.comments);
+                setLoading(false);
             })
             .catch(error => {
                 if (error.response)
@@ -23,22 +27,24 @@ function Movie(props) {
                     console.log(error);
             });
         },[]);
-    if (movie != null) {
-        const commentsArr = []
-        let i=0;
-        for (let key in comments) {
-            commentsArr[i] = comments[key];
-            i++;
-        }
+    if (loading)
+        return <LoadingSpinner />
 
-        return (
-            <div className="main">
-                <MovieDetails movie={movie} setMovie={setMovie}/>
-                <ActorsBox movieId={movieId}/>
-                <CommentsBox comments={commentsArr} setComments={setComments}/>
-            </div>
-        );
+    const commentsArr = []
+    let i=0;
+    for (let key in comments) {
+        commentsArr[i] = comments[key];
+        i++;
     }
+
+    return (
+        <div className="main">
+            <MovieDetails movie={movie} setMovie={setMovie}/>
+            <ActorsBox movieId={movieId}/>
+            <CommentsBox comments={commentsArr} setComments={setComments}/>
+        </div>
+    );
+
 }
 
 function MovieDetails(props) {
@@ -64,6 +70,7 @@ function Image(props) {
 
 function Score(props) {
     const [show, setShow] = useState(true);
+    const [loading, setLoading] = useState(false);
     const handleClick = () => {
         setShow(false);
     }
@@ -77,10 +84,15 @@ function Score(props) {
                     </div>
                 }
                 {!show &&
-                    <Stars setShow={setShow} setMovie={props.setMovie} movieId={props.movie.id}/>
+                    <Stars setShow={setShow} setMovie={props.setMovie} movieId={props.movie.id} setLoading={setLoading}/>
                 }
-                <dt dir="rtl"> امتیاز کاربران {props.movie.rating}</dt>
-                <dt dir="rtl"> ({props.movie.ratingCount} رای)</dt>
+                {loading? (<LoadingSpinner />) : (
+                    <div>
+                        <dt dir="rtl"> امتیاز کاربران {props.movie.rating}</dt>
+                        <dt dir="rtl"> ({props.movie.ratingCount} رای)</dt>
+                    </div>
+                    )
+                }
             </dl>
         </div>
     );
@@ -89,9 +101,11 @@ function Score(props) {
 function Stars(props) {
     const handleClick= (rate) => {
         props.setShow(true);
+        props.setLoading(true);
         postRate(props.movieId, 10 - rate)
             .then(res => {
                 props.setMovie(res);
+                props.setLoading(false);
             })
             .catch(error => {
                 if (error.response)
@@ -240,6 +254,7 @@ function CommentsBox(props) {
 
 function NewComment(props) {
     const [comment, setComment] = useState("");
+    const [loading, setLoading] = useState(false);
     const handleChange = (e) => {
         e.preventDefault();
         setComment(e.target.value);
@@ -247,11 +262,13 @@ function NewComment(props) {
     const {movieId} = useParams();
     const handleSubmit =  (e) => {
         e.preventDefault();
+        setLoading(true);
         addComment(movieId, comment)
             .then(res => {
                 let newComments = [...props.comments];
                 newComments.push(res);
                 props.setComments(newComments);
+                setLoading(false);
             })
             .catch(error => {
                 if (error.response)
@@ -259,20 +276,20 @@ function NewComment(props) {
                 else
                     console.log(error);
             })
-
-
     }
     return (
         <div className="comment">
             <div className="comment-text">
                 <p> دیدگاه خود را اضافه کنید: </p>
                 <hr className="hor-line" />
-                <div>
-                    <form className="comment-form" action="/action_page.php" onSubmit={handleSubmit}>
-                        <input type="text" className="com-txt" id="com-txt" name="text" onChange={handleChange}/>
-                        <input type="submit" className="submit-button" value="ثبت" />
-                    </form>
-                </div>
+                {loading? (<LoadingSpinner />) : (
+                    <div>
+                        <form className="comment-form" action="/action_page.php" onSubmit={handleSubmit}>
+                            <input type="text" className="com-txt" id="com-txt" name="text" onChange={handleChange}/>
+                            <input type="submit" className="submit-button" value="ثبت"/>
+                        </form>
+                    </div>
+                )}
             </div>
         </div>
     );

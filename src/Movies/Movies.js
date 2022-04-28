@@ -3,22 +3,26 @@ import { useEffect } from 'react';
 import React from "react";
 import './Movies.css'
 import {getMovies} from "../Services/Movies";
+import LoadingSpinner from '../common/LoadingSpinner';
 
 class Movies extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {movies: [], defaultSort:true};
+        this.state = {movies: [], defaultSort:true, loading:true};
     }
 
     render() {
+        {console.log('hereee ' + this.state.loading);}
         return (
             <div className="main">
                 <div className="row">
                     <SortingOptions onClickSortByRate={() => this.handleSortOption(true)} onClickSortByDate={() => this.handleSortOption(false)}/>
-                    {this.state.movies.length > 0 &&
+                    {!this.state.loading? (
                         <div className="flex-center col-8 mt-5 pt-5">
                             <MoviesList movies={this.state.movies}/>
-                        </div>
+                        </div> ) : (
+                        <LoadingSpinner />
+                    )
                     }
                 </div>
             </div>
@@ -30,9 +34,11 @@ class Movies extends React.Component {
     }
 
     showMovies() {
+        this.setState({loading:true});
         getMovies(this.state.defaultSort, this.props.searchBy, this.props.searchValue)
             .then(res => {
                 this.setState(prevState => ({movies:res}));
+                this.setState({loading:false});
             })
             .catch(error => {
                 if (error.response)
@@ -60,7 +66,7 @@ function SortingOptions(props) {
             <div className="sorting"><h2> رتبه بندی بر اساس: </h2></div>
             <div className="sorting-table mt-3">
                 <a href="#" onClick={() => props.onClickSortByDate()}> تاریخ</a>
-                <div onClick={() => props.onClickSortByRate()}><h3> امتیاز imdb </h3></div>
+                <a href="#" onClick={() => props.onClickSortByRate()}> امتیاز imdb </a>
             </div>
         </div>
     );

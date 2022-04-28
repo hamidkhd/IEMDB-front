@@ -28,6 +28,7 @@ export async function deleteFromWatchList(movieId) {
 
 export async function getRecommendedMovies() {
     const userId = JSON.parse(localStorage.getItem("user")).email;
+    console.log(userId);
     const resp = await axios.get(
         `http://localhost:8080/IE_ca3_war_exploded/getRecommendedMovies/${userId}`
     );

@@ -1,11 +1,14 @@
 import React, {useState} from "react";
 import './Login.css';
 import {getUser} from "../Services/User";
+import LoadingSpinner from "../common/LoadingSpinner";
 
 function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [loading, setLoading] = useState(false);
     const handleSubmit = e => {
+        setLoading(true);
         e.preventDefault();
         getUser(username, password)
             .then(res => {
@@ -17,6 +20,7 @@ function Login(props) {
                     props.setLogin(true, res);
                     window.location.replace("http://localhost:3000/");
                 }
+                setLoading(false);
                 })
             .catch(error => {
             if (error.response)
@@ -54,10 +58,12 @@ function Login(props) {
                         </div>
                     </div>
                     <div className="form-group">
-                        <button type="submit" className="login-key btn btn-primary btn-lg"> ورود</button>
+                        {loading? (<LoadingSpinner />) : (
+                            <button type="submit" className="login-key btn btn-primary btn-lg"> ورود</button>)
+                        }
                     </div>
                 </form>
-                <div className="text-center"> آیا از قبل حساب کاربری ندارید؟ <a href="/HTML/SignUp.html"> ثبت نام </a></div>
+                <div className="text-center"> آیا از قبل حساب کاربری ندارید؟ <a href="/Signup"> ثبت نام </a></div>
             </div>
         </div>
     );

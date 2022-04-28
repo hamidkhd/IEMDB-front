@@ -55,18 +55,18 @@ function App() {
 
     const routes =(
         <Routes>
-        <Route exact path="/" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
-        <Route exact path="/movies" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
+            <Route exact path="/" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
+            <Route exact path="/movies" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
+            <Route path="/movies/:movieId" element={<Movie />}/>
+            <Route path="/actors/:actorId" element={<Actor />}/>
             <Route path="/watchlist" element={<Watchlist /> } />
-
-
         </Routes>
     )
     const otherRoutes = (
         <Routes>
             <Route exact path="/" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
+            <Route exact path="/movies" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
             <Route path="*" element={<Login setLogin={changeLogin}/>}/>
-            <Route  element={<Login setLogin={changeLogin}/>}/>
         </Routes>
     )
     return (
