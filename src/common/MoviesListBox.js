@@ -7,17 +7,17 @@ function MoviesList(props) {
     return movies;
 }
 
-export function Movie(props) {
-    let url = "/movies/" + props.movie.id;
+export function Movie(movie) {
+    let url = "/movies/" + movie.id;
     return (
         <a href={url}>
             <div className="img-container">
-                <img src={props.movie.image} alt={props.movie.name} className="image" />
+                <img src={movie.image} alt={movie.name} className="image" />
                 <div className="overlay">
                     <div className="text">
                         <dl>
-                            <dt dir="rtl"><h1> {props.movie.name} </h1></dt>
-                            <dt dir="rtl"> {props.movie.imdbRate}</dt>
+                            <dt dir="rtl"><h1> {movie.name} </h1></dt>
+                            <dt dir="rtl"> {movie.imdbRate}</dt>
                         </dl>
                     </div>
                 </div>

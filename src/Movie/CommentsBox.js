@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {useParams} from "react-router-dom";
-import {addComment, postMovieCommentRate} from "../Services/Movie";
+import {addComment, postMovieCommentRate} from "../Services/Comment";
 import LoadingSpinner from "../common/LoadingSpinner";
 
 function CommentsBox(props) {

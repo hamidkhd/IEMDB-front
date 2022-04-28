@@ -88,7 +88,7 @@ class MoviesList extends React.Component {
         if (index > this.props.movies.length - 1)
             return null;
         return (
-            <Movie movie={this.props.movies[index]}/>
+            Movie(this.props.movies[index])
         );
     }
 
