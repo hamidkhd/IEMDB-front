@@ -10,9 +10,12 @@ import Actor from './Actor/Actor';
 import Watchlist from "./Watchlist/Watchlist";
 import ProtectedRoute from "./common/Test";
 import ProtectedRoutes from "./common/Test";
+import {toast} from "react-toastify";
 
+
+toast.configure();
 function App() {
-
+    const [showToast, setShowToast] = useState(false);
     const [searchBy, setSearchBy] = useState("name");
     const [searchValue, setSearchValue] = useState("");
     const changeSearchOptions = (newSearchBy, newSearchValue) => {
@@ -20,11 +23,16 @@ function App() {
         setSearchValue(newSearchValue);
     }
 
+    const showLogoutToast = () => {
+        setShowToast(true);
+        toast.info("You logged out successfully");
+    }
+
 
 
     const routes =(
         <Routes>
-            <Route exact path="/" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
+            <Route exact path="/" element={<Movies searchBy={searchBy} searchValue={searchValue} showToast={showToast}/>} />
             <Route exact path="/movies" element={<Movies searchBy={searchBy} searchValue={searchValue}/>} />
             <Route path="/movies/:movieId" element={<Movie />}/>
             <Route path="/actors/:actorId" element={<Actor />}/>
@@ -44,7 +52,7 @@ function App() {
         <header>
 
             <BrowserRouter forceRefresh={true}>
-                <Navbar searchDetails={changeSearchOptions} />
+                <Navbar searchDetails={changeSearchOptions} showLogoutToast={showLogoutToast} />
                 {/*<Routes forceRefresh={true}>*/}
                 {/*    <Route path="/login" element={<Login setLogin={changeLogin} login={loggedIn}/>}/>*/}
                 {/*    <Route element={<ProtectedRoutes login={loggedIn}/>} >*/}

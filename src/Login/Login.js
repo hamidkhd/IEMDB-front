@@ -2,30 +2,44 @@ import React, {useState} from "react";
 import './Login.css';
 import {getUser} from "../Services/User";
 import LoadingSpinner from "../common/LoadingSpinner";
+import 'react-toastify/dist/ReactToastify.css';
+import {ToastContainer, toast} from 'react-toastify';
 
 function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+    const validateEmail = () => {
+        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
+        if(username.match(validRegex))
+            return true;
+        else
+            return false;
+    }
     const handleSubmit = e => {
-        setLoading(true);
+        const valid = validateEmail();
         e.preventDefault();
-        getUser(username, password)
-            .then(res => {
-                if(res.name == "error")
-                    window.location.replace("http://localhost:3000/login");
-                else {
-                    localStorage.setItem("user", JSON.stringify(res));
-                    window.location.replace("http://localhost:3000/");
-                }
-                setLoading(false);
+        if (valid) {
+            setLoading(true);
+            getUser(username, password)
+                .then(res => {
+                    if (res.name == "error") {
+                        toast.error("Incorrect username or password");
+                    } else {
+                        localStorage.setItem("user", JSON.stringify(res));
+                        window.location.replace("http://localhost:3000/");
+                    }
+                    setLoading(false);
                 })
-            .catch(error => {
-            if (error.response)
-                console.log(error.response.data);
-            else
-                console.log(error);
-        })
+                .catch(error => {
+                    if (error.response)
+                        console.log(error.response.data);
+                    else
+                        console.log(error);
+                })
+        }
+        else
+            toast.error("Invalid Email");
     }
 
     const handleChangeUsername = (event) => {

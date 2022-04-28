@@ -6,6 +6,7 @@ import { useParams } from 'react-router-dom';
 import {getUser} from "../Services/User";
 import {getRecommendedMovies, updateWatchList} from "../Services/Watchlist";
 import LoadingSpinner from "../common/LoadingSpinner";
+import {toast} from "react-toastify";
 
 function Movie(props) {
     const { movieId } = useParams();
@@ -154,10 +155,13 @@ function MovieInfo(props) {
 }
 
 function AddToWatchList(props) {
+    const [loading, setLoading] = useState(false);
     const handleSubmit = () => {
+        setLoading(true);
         updateWatchList(props.movie.id, props.movie.ageLimit)
             .then(res => {
-                console.log('added');
+                setLoading(false);
+                toast.info(res);
             })
             .catch(error => {
                 if (error.response)
@@ -169,11 +173,14 @@ function AddToWatchList(props) {
     return (
         <div className="col-image">
             <img src={props.movie.image} alt={props.movie.name} />
+            {loading? (<LoadingSpinner />) : (
                 <div className="add-to-watchList">
-                    <input type="hidden" id="form_action" name="action" value="add" />
-                        <input type="hidden" id="form_movie_id" name="movie_id" value="1" />
-                            <button type="submit" onClick={handleSubmit}> افزودن به لیست</button>
+                    <input type="hidden" id="form_action" name="action" value="add"/>
+                    <input type="hidden" id="form_movie_id" name="movie_id" value="1"/>
+                    <button type="submit" onClick={handleSubmit}> افزودن به لیست</button>
                 </div>
+            )
+            }
         </div>
     );
 }

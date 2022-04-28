@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import '../Movies/Movies.css';
 import templatePic from '../common/template.png'
 import {Navigate} from "react-router-dom";
+import {toast} from "react-toastify";
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -68,21 +69,25 @@ class Navbar extends React.Component {
                     {(window.location.pathname == ("/") || window.location.pathname == ("/movies")) &&
                         this.searchBox()
                     }
-                    <UserIcon />
+                    <UserIcon showLogoutToast={this.props.showLogoutToast}/>
                 </nav>
             </header>
         );
     }
 }
 
-function UserIcon() {
+function UserIcon(props) {
     const [loading, setLoading] = useState(false);
+    const [showToast, setShowToast] = useState(false);
     const logout = () => {
+        setShowToast(true);
         localStorage.removeItem("user");
+        toast.info("You logged out successfully");
+        props.showLogoutToast();
     }
+    if (showToast)
+        toast.info("You logged out successfully");
     const login = localStorage.getItem("user") == null ? false:true;
-    console.log(localStorage.getItem("user"));
-    console.log(login);
     return (
         <div className="guest-dropdown">
             <span className="iconify" data-icon="bxs:user-circle"></span>
