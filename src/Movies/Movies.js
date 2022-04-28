@@ -14,10 +14,6 @@ class Movies extends React.Component {
 
     render() {
         {console.log('hereee ' + this.state.loading);}
-        if(this.props.showToast) {
-            console.log('tost');
-            toast.info("you loggef otu")
-        }
         return (
             <div className="main">
                 <div className="row">

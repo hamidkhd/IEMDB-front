@@ -83,7 +83,6 @@ function UserIcon(props) {
         setShowToast(true);
         localStorage.removeItem("user");
         toast.info("You logged out successfully");
-        props.showLogoutToast();
     }
     if (showToast)
         toast.info("You logged out successfully");
