@@ -9,6 +9,6 @@ export function userLoggedIn() {
         return true;
 }
 
-export function useLogout() {
+export function userLogout() {
     localStorage.removeItem("user");
 }
