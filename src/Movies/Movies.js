@@ -5,6 +5,7 @@ import './Movies.css'
 import {getMovies} from "../Services/Movies";
 import LoadingSpinner from '../common/LoadingSpinner';
 import {toast} from "react-toastify";
+import {Movie} from "../common/MoviesListBox";
 
 class Movies extends React.Component {
     constructor(props) {
@@ -13,7 +14,6 @@ class Movies extends React.Component {
     }
 
     render() {
-        {console.log('hereee ' + this.state.loading);}
         return (
             <div className="main">
                 <div className="row">
@@ -23,8 +23,7 @@ class Movies extends React.Component {
                             <MoviesList movies={this.state.movies}/>
                         </div> ) : (
                         <LoadingSpinner />
-                    )
-                    }
+                    )}
                 </div>
             </div>
         );
@@ -88,19 +87,8 @@ class MoviesList extends React.Component {
     movie(index) {
         if (index > this.props.movies.length - 1)
             return null;
-        let url = "/movies/" + this.props.movies[index].id;
         return (
-            <a href={url}>
-                <div className="movie">
-                    <img src={this.props.movies[index].image} alt={this.props.movies[index].name} className="image" />
-                        <div className="movie-overlay">
-                            <div className="overlay-text">
-                                <p> {this.props.movies[index].name} </p>
-                                <p> {this.props.movies[index].imdbRate} </p>
-                            </div>
-                        </div>
-                </div>
-            </a>
+            <Movie movie={this.props.movies[index]}/>
         );
     }
 
