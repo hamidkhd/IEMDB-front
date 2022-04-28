@@ -4,13 +4,14 @@ import { useParams } from 'react-router-dom';
 import {getMovie} from "../Services/Movie";
 import {getActorMovies, getActor} from "../Services/Actors";
 import LoadingSpinner from "../common/LoadingSpinner";
+import MoviesList from "../common/MoviesListBox";
 
 function Actor(props) {
     const [actor, setActor] = useState(null);
     const [actorMovies, setActorMovies] = useState({});
     const [loading, setLoading] = useState(true);
-
     const { actorId } = useParams();
+
     useEffect( () => {
         getActorMovies(actorId)
             .then(m => {
@@ -37,8 +38,10 @@ function Actor(props) {
                     console.log(error);
             });
     },[]);
+
     if (loading)
         return <LoadingSpinner />;
+
     return (
         <div className="container-fluid">
             <div className="row">
@@ -47,7 +50,7 @@ function Actor(props) {
                     <ActorInformation actor={actor} movieNum={actorMovies.length}/>
                     <div className="row1"><h2> فیلم ها </h2></div>
                     <div className="row4">
-                        <PlayedMovies movies={actorMovies}/>
+                        <MoviesList movies={actorMovies}/>
                     </div>
                 </div>
                 <div className="flex-left col-4">
@@ -71,30 +74,5 @@ function ActorInformation(props) {
     );
 }
 
-function Movie(movie) {
-    let url = "/movies/" + movie.id;
-    return (
-        <a href={url}>
-            <div className="img-container">
-                <img src={movie.image} alt={movie.name} className="image" />
-                <div className="overlay">
-                    <div className="text">
-                        <dl>
-                            <dt dir="rtl"><h1> {movie.name} </h1></dt>
-                            <dt dir="rtl"> {movie.imdbRate}</dt>
-                        </dl>
-                    </div>
-                </div>
-            </div>
-        </a>
-    );
-}
-
-function PlayedMovies(props) {
-    let movies = []
-    for (let i=0; i<props.movies.length; i++)
-        movies.push(Movie(props.movies[i]));
-    return movies;
-}
 
 export default Actor;

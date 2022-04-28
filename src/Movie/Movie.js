@@ -187,10 +187,13 @@ function AddToWatchList(props) {
 
 function ActorsBox(props) {
     const [actors, setActors] = useState({});
+    const [loading, setLoading] = useState(true);
     useEffect( () => {
+        setLoading(true);
         getMovieActors(props.movieId)
             .then(res => {
                 setActors(res);
+                setLoading(false);
             })
             .catch(error => {
                 if (error.response)
@@ -199,7 +202,8 @@ function ActorsBox(props) {
                     console.log(error);
             });
     },[]);
-    if (actors.length > 0) {
+    if(loading)
+        return <LoadingSpinner />
         let actorItem = [];
         for (let i=0; i<actors.length; i++) {
             actorItem.push(ActorItem(actors[i]));
@@ -213,7 +217,7 @@ function ActorsBox(props) {
             </div>
         );
 
-    }
+
 
 
 }

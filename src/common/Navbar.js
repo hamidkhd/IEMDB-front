@@ -84,12 +84,9 @@ class Navbar extends React.Component {
 }
 
 function UserIcon(props) {
-    const [loading, setLoading] = useState(false);
-    const [showToast, setShowToast] = useState(false);
     const logout = () => {
        userLogout();
     }
-
     return (
         <div className="guest-dropdown">
             <span className="iconify" data-icon="bxs:user-circle"></span>
