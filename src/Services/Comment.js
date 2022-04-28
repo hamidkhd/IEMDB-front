@@ -1,9 +1,9 @@
 import axios from "axios";
 
 export async function postMovieCommentRate(movieId, userId, commentId, like) {
-    const params = movieId + "?userId=" + userId + "&commentId=" + commentId + "&like=" + like;
+    const params = "?userId=" + userId + "&commentId=" + commentId + "&like=" + like;
     const resp = await axios.post(
-        `http://localhost:8080/IE_ca3_war_exploded/postMovieCommentRate/${params}`
+        `http://localhost:8080/IE_ca3_war_exploded/postMovieCommentRate${params}`
     );
     return resp.data
 }
