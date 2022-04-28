@@ -3,12 +3,14 @@ import './Login.css';
 import {getUser} from "../Services/User";
 import LoadingSpinner from "../common/LoadingSpinner";
 import 'react-toastify/dist/ReactToastify.css';
-import {ToastContainer, toast} from 'react-toastify';
+import {toast} from 'react-toastify';
+import {setUser} from "../Services/UserManager";
 
 function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
+
     const validateEmail = () => {
         const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
         if(username.match(validRegex))
@@ -16,17 +18,17 @@ function Login(props) {
         else
             return false;
     }
+
     const handleSubmit = e => {
-        const valid = validateEmail();
         e.preventDefault();
-        if (valid) {
+        if (validateEmail()) {
             setLoading(true);
             getUser(username, password)
                 .then(res => {
                     if (res.name == "error") {
                         toast.error("Incorrect username or password");
                     } else {
-                        localStorage.setItem("user", JSON.stringify(res));
+                        setUser(res);
                         window.location.replace("http://localhost:3000/");
                     }
                     setLoading(false);
@@ -50,25 +52,37 @@ function Login(props) {
         setPassword(event.target.value);
     }
 
+    const usernameInput = () => {
+        return (
+            <div className="form-group">
+                <div className="input-group">
+                    <span className="input-group-addon"></span>
+                    <input type="text" className="form-control" name="username" placeholder="نام کاربری"
+                           required="required" value={username} onChange={handleChangeUsername}/>
+                </div>
+            </div>
+        );
+    }
+
+    const passwordInput = () => {
+        return (
+            <div className="form-group">
+                <div className="input-group">
+                    <span className="input-group-addon"></span>
+                    <input type="text" className="form-control" name="password" placeholder="رمز ورود"
+                           required="required" value={password} onChange={handleChangePassword}/>
+                </div>
+            </div>
+        );
+    }
+
     return (
         <div className={"login-container"}>
             <div className="login-form">
                 <form onSubmit={handleSubmit}>
                     <h2 className="title"> ورود </h2>
-                    <div className="form-group">
-                        <div className="input-group">
-                            <span className="input-group-addon"></span>
-                            <input type="text" className="form-control" name="username" placeholder="نام کاربری"
-                               required="required" value={username} onChange={handleChangeUsername}/>
-                        </div>
-                    </div>
-                    <div className="form-group">
-                        <div className="input-group">
-                            <span className="input-group-addon"></span>
-                            <input type="text" className="form-control" name="password" placeholder="رمز ورود"
-                               required="required" value={password} onChange={handleChangePassword}/>
-                        </div>
-                    </div>
+                    {usernameInput()}
+                    {passwordInput()}
                     <div className="form-group">
                         {loading? (<LoadingSpinner />) : (
                             <button type="submit" className="login-key btn btn-primary btn-lg"> ورود</button>)
