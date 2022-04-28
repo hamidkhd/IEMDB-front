@@ -1,0 +1,33 @@
+* {
+    direction: rtl;
+    font-family: 'Vazir', sans-serif;
+    font-size: 18px;
+}
+
+html {
+    background-color: #292929;
+}
+
+body {
+    background-color: #292929;
+}
+
+.navbar {
+    background-color: #B12025;
+    direction: ltr;
+}
+
+.logo {
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+.iconify {
+    width: 4.5rem;
+    height: 4.5rem;
+}
+
+.guest-dropdown .iconify {
+    width: 4.5rem !important;
+    height: 4.5rem !important;
+}
