@@ -1,0 +1,45 @@
+body {
+    background-color: #292929 !important;
+    direction: ltr !important;
+}
+.signup-form {
+    width: 35em;
+    height: 48em;
+    margin-top: 10em;
+    margin-left: 45em;
+    padding: 1em;
+    background-color: #4E4E50;
+}
+.signup-form form {
+    color: black;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    padding: 50px;
+}
+
+.signup-form label {
+    font-weight: normal;
+    font-size: 30px;
+}
+
+.signup-form .form-control {
+    min-height: 50px;
+    box-shadow: none;
+}
+
+.signup-form .text-center {
+    font-size: 20px;
+}
+
+.signup-form .title {
+    text-align: center;
+}
+
+.signup-key {
+    margin: auto;
+}
+
+
+.form-group {
+    display: flex;
+}

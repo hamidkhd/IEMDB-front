@@ -1,47 +1,39 @@
 import React, {useState} from "react";
 import './Login.css';
-import {getUser} from "../Services/User";
-import LoadingSpinner from "../common/LoadingSpinner";
+import {getUser} from "../../Services/User";
+import LoadingSpinner from "../../common/LoadingSpinner";
 import 'react-toastify/dist/ReactToastify.css';
 import {toast} from 'react-toastify';
-import {setUser} from "../Services/UserManager";
+import {setUser} from "../../Services/UserManager";
+import {validateEmail} from "../Utils";
 
 function Login(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
 
-    const validateEmail = () => {
-        const validRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
-        if(username.match(validRegex))
-            return true;
-        else
-            return false;
-    }
 
     const handleSubmit = e => {
         e.preventDefault();
-        if (validateEmail()) {
-            setLoading(true);
-            getUser(username, password)
-                .then(res => {
-                    if (res.name == "error") {
-                        toast.error("Incorrect username or password");
-                    } else {
-                        setUser(res);
-                        window.location.replace("http://localhost:3000/");
-                    }
-                    setLoading(false);
-                })
-                .catch(error => {
-                    if (error.response)
-                        console.log(error.response.data);
-                    else
-                        console.log(error);
-                })
-        }
-        else
-            toast.error("Invalid Email");
+        if (! validateEmail(username))
+            return;
+        setLoading(true);
+        getUser(username, password)
+            .then(res => {
+                if (res.name == "error") {
+                    toast.error("Incorrect username or password");
+                } else {
+                    setUser(res);
+                    window.location.replace("http://localhost:3000/");
+                }
+                setLoading(false);
+            })
+            .catch(error => {
+                if (error.response)
+                    console.log(error.response.data);
+                else
+                    console.log(error);
+            })
     }
 
     const handleChangeUsername = (event) => {

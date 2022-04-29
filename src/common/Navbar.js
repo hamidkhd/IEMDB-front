@@ -94,7 +94,7 @@ function UserIcon(props) {
                 {!userLoggedIn() ? (
                     <div>
                         <a href="/login">ورود</a>
-                        <a href="#">ثبت نام</a>
+                        <a href="/signup">ثبت نام</a>
                     </div> ) : (
                     <div>
                         <a href="">{JSON.parse(localStorage.getItem("user")).email}</a>
