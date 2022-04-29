@@ -93,7 +93,7 @@
 
 .overlay {
     position: absolute;
-    border-radius: 20px;
+    border-radius: 1em;
     top: 0;
     bottom: 0;
     left: 0;
