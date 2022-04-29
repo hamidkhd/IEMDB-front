@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import {passwordsMatch, validateEmail} from "../Utils";
+import './Signup.css';
 import {toast} from "react-toastify";
 
 function Signup(props) {
@@ -17,20 +18,22 @@ function Signup(props) {
     }
 
     return (
-        <div className="signup-form">
-            <form onSubmit={handleSubmit}>
-                <h2 className="title">ثبت نام</h2>
-                <Input placeholder={"نام"} setter={setName}/>
-                <Input placeholder={"نام مستعار"} setter={setNickname}/>
-                <Input placeholder={"تاریخ تولد"} setter={setBirthDate}/>
-                <Input placeholder={"نام کاربری"} setter={setUsername}/>
-                <Input placeholder={"رمز ورود"} setter={setPassword}/>
-                <Input placeholder={"تکرار رمز ورود"} setter={setRepeatPass}/>
-                <div className="form-group">
-                    <button type="submit" className="signup-key btn btn-primary btn-lg">ثبت نام</button>
-                </div>
-            </form>
-            <div className="text-center"> آیا از قبل حساب کاربری دارید؟ <a href="/login"> ورود </a></div>
+        <div className="signup-form-top">
+            <div className="signup-form">
+                <form onSubmit={handleSubmit}>
+                    <h2 className="title">ثبت نام</h2>
+                    <Input placeholder={"نام"} setter={setName}/>
+                    <Input placeholder={"نام مستعار"} setter={setNickname}/>
+                    <Input placeholder={"تاریخ تولد"} setter={setBirthDate}/>
+                    <Input placeholder={"نام کاربری"} setter={setUsername}/>
+                    <Input placeholder={"رمز ورود"} setter={setPassword}/>
+                    <Input placeholder={"تکرار رمز ورود"} setter={setRepeatPass}/>
+                    <div className="form-group">
+                        <button type="submit" className="signup-key btn btn-primary btn-lg">ثبت نام</button>
+                    </div>
+                </form>
+                <div className="text-center"> آیا از قبل حساب کاربری دارید؟ <a href="/login"> ورود </a></div>
+            </div>
         </div>
     )
 }
@@ -43,7 +46,6 @@ function Input(props) {
     return (
         <div className="form-group">
             <div className="input-group">
-                <span className="input-group-addon"><i className="fa fa-user"></i></span>
                 <input type="text" className="form-control" placeholder={props.placeholder} onChange={handleChange}
                        required="required" />
             </div>

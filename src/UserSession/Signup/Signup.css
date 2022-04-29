@@ -4,9 +4,8 @@ body {
 }
 .signup-form {
     width: 35em;
-    height: 48em;
+    height: 45em;
     margin-top: 10em;
-    margin-left: 45em;
     padding: 1em;
     background-color: #4E4E50;
 }
@@ -42,4 +41,10 @@ body {
 
 .form-group {
     display: flex;
+}
+
+.signup-form-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
