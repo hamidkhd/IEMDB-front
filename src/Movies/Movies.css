@@ -58,8 +58,6 @@
 
 .guest-dropdown:hover .guest-dropdown-content  {
     display: block;
-    width: 8em;
-    height: 8em;
     border-radius: 15px;
     align-items: center;
 }
