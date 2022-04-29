@@ -14,7 +14,7 @@ function CommentsBox(props) {
         commentItems.push(CommentItem(props.comments[i], changeComments, i));
     return (
         <div className="comments-box">
-            <div className="title"> دیدگاه ها</div>
+            <div className="title"> دیدگاه ها </div>
             <div className="comments-list">
                 <NewComment setComments={props.setComments} comments={props.comments} />
                 {commentItems}
@@ -105,14 +105,12 @@ function CommentRate(props) {
             })
     }
     return (
-        <div>
+        <div className="rate-icon">
             <div onClick={() => updateLike("1")}>
-            <span className="iconify like-icon" data-icon="eva:arrow-ios-upward-fill"
-            ></span>
+                <span className="iconify like-icon" data-icon="eva:arrow-ios-upward-fill"></span>
             </div>
             <div onClick={() => updateLike("-1")}>
-            <span className="iconify dislike-icon" data-icon="eva:arrow-ios-upward-fill"
-                  data-rotate="180deg"></span>
+                <span className="iconify dislike-icon" data-icon="eva:arrow-ios-upward-fill" data-rotate="180deg"></span>
             </div>
         </div>
     );
