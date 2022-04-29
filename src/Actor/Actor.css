@@ -114,3 +114,9 @@
 .overlay .text h1 {
     font-size: 1em !important;
 }
+
+.actor-spinner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

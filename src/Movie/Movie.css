@@ -35,7 +35,7 @@ body {
     background-color: white;
     border-radius: 2em;
     width: 45em;
-    height: 12em;
+    height: 15em;
     justify-content: center;
     margin-bottom: 2em;
 }
@@ -151,7 +151,10 @@ body {
 .comment-text {
     text-align: right;
     padding-right: 2em;
-
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 1em;
 }
 
 .submit {
@@ -365,6 +368,12 @@ dt {
 }
 
 .desc .desc-text-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.movie-spinner {
     display: flex;
     flex-direction: column;
     align-items: center;

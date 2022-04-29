@@ -40,7 +40,7 @@ function Actor(props) {
     },[]);
 
     if (loading)
-        return <LoadingSpinner />;
+        return <div className="actor-spinner"> <LoadingSpinner /> </div>;
 
     return (
         <div className="container-fluid">

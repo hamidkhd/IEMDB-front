@@ -30,7 +30,7 @@ function Movie(props) {
             });
         },[]);
     if (loading)
-        return <LoadingSpinner />
+        return <div className="movie-spinner"> <LoadingSpinner /> </div>
 
     const commentsArr = []
     let i=0;
