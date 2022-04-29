@@ -235,6 +235,7 @@ svg {
     flex-direction: column;
     width: 25em;
     height: 25em;
+    align-items: center;
 }
 
 .col-image img {
@@ -264,7 +265,6 @@ dt {
 }
 
 .custom-icon-star {
-    margin-left: 1em;
     margin-bottom: 1em;
 }
 
@@ -282,7 +282,8 @@ dt {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    margin-right: 1em;
+    width: 15em;
+    height: 15em;
 }
 
 .add-to-watchList {
@@ -359,3 +360,12 @@ dt {
     }
 }
 
+.desc .desc-text {
+    margin: 0;
+}
+
+.desc .desc-text-top {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

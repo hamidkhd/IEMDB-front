@@ -73,7 +73,7 @@ function Score(props) {
     return (
         <div className="col-score">
             <dl className="desc">
-                <dt dir="rtl"><h1>{props.movie.imdbRate}</h1></dt>
+                <dt className="desc-text"><h1>{props.movie.imdbRate}</h1></dt>
                 {show? (
                     <div onClick={handleClick}>
                         <span className="iconify custom-icon-star" data-icon="emojione:star" o></span>
@@ -81,9 +81,9 @@ function Score(props) {
                     <Stars setShow={setShow} setMovie={props.setMovie} movieId={props.movie.id} setLoading={setLoading}/>
                 )}
                 {loading? (<LoadingSpinner />) : (
-                    <div>
-                        <dt dir="rtl"> امتیاز کاربران {props.movie.rating}</dt>
-                        <dt dir="rtl"> ({props.movie.ratingCount} رای)</dt>
+                    <div className="desc-text-top">
+                        <dt className="desc-text"> امتیاز کاربران {props.movie.rating}</dt>
+                        <dt className="desc-text"> ({props.movie.ratingCount} رای)</dt>
                     </div>
                     )}
             </dl>
@@ -169,7 +169,7 @@ function AddToWatchList(props) {
                 <div className="add-to-watchList">
                     <input type="hidden" id="form_action" name="action" value="add"/>
                     <input type="hidden" id="form_movie_id" name="movie_id" value="1"/>
-                    <button type="submit" onClick={handleSubmit}> افزودن به لیست</button>
+                    <button type="submit" onClick={handleSubmit}> افزودن به لیست </button>
                 </div>
             )
             }
