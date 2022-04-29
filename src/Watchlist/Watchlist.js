@@ -87,7 +87,7 @@ function MovieItem(movie, setMovies, updateRecommended) {
             <div className="new-col">
                 <dl className="desc" onClick={handleDeleteClick}>
                     <dt dir="rtl"> {movie.name}</dt>
-                    <span className="iconify custom-icon" data-icon="ei:trash"></span>
+                    <span className="iconify custom-icon-trash" data-icon="ei:trash"></span>
                 </dl>
             </div>
         );

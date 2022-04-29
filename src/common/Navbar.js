@@ -47,7 +47,7 @@ class Navbar extends React.Component {
         return (
             <div className="search-dropdown">
                 <div className="search-filter">
-                    <span className="iconify custom-icon" data-icon="mdi:triangle" data-rotate="180deg"></span>
+                    <span className="iconify custom-icon-arrows" data-icon="mdi:triangle" data-rotate="180deg"></span>
                     <span className="search-dropdown-text">جست‌وجو براساس:</span>
                 </div>
                 <div className="search-dropdown-content">
