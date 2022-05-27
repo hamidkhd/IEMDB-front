@@ -80,8 +80,8 @@ function CommentItem(comment, changeComment, index) {
                 <div>
                     <CommentRate comment={comment} changeComment={callChangeComment}/>
                     <div className="comment-score">
-                        <span>{comment.like}</span>
-                        <span>{comment.dislike}</span>
+                        <span>{comment.commentLike}</span>
+                        <span>{comment.commentDislike}</span>
                     </div>
                 </div>
             </div>
