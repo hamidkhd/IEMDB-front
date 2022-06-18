@@ -24,7 +24,7 @@ function Login(props) {
                     toast.error("Incorrect username or password");
                 } else {
                     setUser(res);
-                    window.location.replace("http://localhost:3000/");
+                    window.location.replace("http://87.247.187.217:31053/");
                 }
                 setLoading(false);
             })
