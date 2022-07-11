@@ -72,7 +72,7 @@ function Login(props) {
         <div className={"login-container"}>
             <div className="login-form">
                 <form onSubmit={handleSubmit}>
-                    <h2 className="title"> ورود </h2>
+                    <h2 className="title"> ورود1 </h2>
                     {usernameInput()}
                     {passwordInput()}
                     <div className="form-group">
